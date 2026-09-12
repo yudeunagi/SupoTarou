@@ -8,54 +8,36 @@ public sealed class HueRingControl : FrameworkElement
 {
     private static readonly SolidColorBrush[] HueBrushes = CreateHueBrushes();
 
-    /// <summary>
-    /// Hue プロパティ
-    /// </summary>
     public static readonly DependencyProperty HueProperty = DependencyProperty.Register(
         nameof(Hue),
         typeof(double),
         typeof(HueRingControl),
         new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsRender));
 
-    /// <summary>
-    /// RingThickness プロパティ
-    /// </summary>
     public static readonly DependencyProperty RingThicknessProperty = DependencyProperty.Register(
         nameof(RingThickness),
         typeof(double),
         typeof(HueRingControl),
         new FrameworkPropertyMetadata(40d, FrameworkPropertyMetadataOptions.AffectsRender));
 
-    /// <summary>
-    /// MarkerRadius プロパティ
-    /// </summary>
     public static readonly DependencyProperty MarkerRadiusProperty = DependencyProperty.Register(
         nameof(MarkerRadius),
         typeof(double),
         typeof(HueRingControl),
         new FrameworkPropertyMetadata(5d, FrameworkPropertyMetadataOptions.AffectsRender));
 
-    /// <summary>
-    /// Hue 値 (0-360)
-    /// </summary>
     public double Hue
     {
         get => (double)GetValue(HueProperty);
         set => SetValue(HueProperty, value);
     }
 
-    /// <summary>
-    /// リングの厚さ
-    /// </summary>
     public double RingThickness
     {
         get => (double)GetValue(RingThicknessProperty);
         set => SetValue(RingThicknessProperty, value);
     }
 
-    /// <summary>
-    /// マーカーの半径
-    /// </summary>
     public double MarkerRadius
     {
         get => (double)GetValue(MarkerRadiusProperty);
@@ -77,19 +59,16 @@ public sealed class HueRingControl : FrameworkElement
         var ringThickness = Clamp(RingThickness, 1d, Math.Max(1d, maximumRadius));
         var ringRadius = Math.Max(0d, maximumRadius - ringThickness / 2d);
 
-        var ringPen = new Pen
-        {
-            Thickness = ringThickness,
-            StartLineCap = PenLineCap.Round,
-            EndLineCap = PenLineCap.Round
-        };
-
         for (var hue = 0; hue < 360; hue++)
         {
             var startPoint = ToPoint(center, ringRadius, hue);
             var endPoint = ToPoint(center, ringRadius, hue + 1d);
-            ringPen.Brush = HueBrushes[hue];
-            drawingContext.DrawLine(ringPen, startPoint, endPoint);
+            var segmentPen = new Pen(HueBrushes[hue], ringThickness)
+            {
+                StartLineCap = PenLineCap.Round,
+                EndLineCap = PenLineCap.Round
+            };
+            drawingContext.DrawLine(segmentPen, startPoint, endPoint);
         }
 
         var markerPoint = ToPoint(center, ringRadius, Hue);

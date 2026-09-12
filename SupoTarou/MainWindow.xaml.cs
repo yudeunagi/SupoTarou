@@ -123,9 +123,11 @@ public partial class MainWindow : Window
         SvBox.Saturation = colorData.S;
         SvBox.Value = colorData.V;
 
-        HueValueText.Text = $"H : {Math.Round(colorData.H):0}°";
-        SaturationValueText.Text = $"S : {Math.Round(colorData.S):0}%";
-        ValueValueText.Text = $"V : {Math.Round(colorData.V):0}%";
+        HSVValueText.Text = $"HSV : {Math.Round(colorData.H):0}°, {Math.Round(colorData.S):0}%, {Math.Round(colorData.V):0}%";
+        // 分割したい場合はこっち
+        // HueValueText.Text = $"H : {Math.Round(colorData.H):0}°";
+        // SaturationValueText.Text = $"S : {Math.Round(colorData.S):0}%";
+        // ValueValueText.Text = $"V : {Math.Round(colorData.V):0}%";
     }
 
     private void UpdateStateText()

@@ -5,26 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SupoTarou.Controls"
         mc:Ignorable="d"
-        Title="Color Spotter"
-        Height="560"
-        Width="420"
-        MinHeight="520"
-        MinWidth="380">
-    <Grid Margin="20">
+        Title="スポ太郎"
+        ResizeMode="NoResize"
+        Topmost="True"
+        Height="420"
+        Width="300"
+        Background="#888888"
+        >
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <TextBlock
-            Grid.Row="0"
-            Text="画面色スポイト"
-            FontSize="24"
-            FontWeight="SemiBold"
-            HorizontalAlignment="Center"
-            Margin="0,0,0,8" />
 
         <Border
             Grid.Row="1"
@@ -34,34 +28,32 @@
             Padding="12"
             Margin="0,0,0,16">
             <Grid
-                Width="320"
-                Height="320"
+                Width="240"
+                Height="240"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
                 <controls:HueRingControl
                     x:Name="HueRing"
-                    RingThickness="44"
+                    RingThickness="24"
                     MarkerRadius="6" />
                 <controls:SVBoxControl
                     x:Name="SvBox"
-                    Margin="78"
+                    Margin="60"
                     MarkerRadius="6" />
             </Grid>
         </Border>
 
         <StackPanel Grid.Row="2" Margin="4,0,0,0">
-            <TextBlock x:Name="HueValueText" FontSize="16" FontFamily="Consolas" />
-            <TextBlock x:Name="SaturationValueText" FontSize="16" FontFamily="Consolas" />
-            <TextBlock x:Name="ValueValueText" FontSize="16" FontFamily="Consolas" />
-            <TextBlock x:Name="StateText" FontSize="18" FontWeight="SemiBold" Margin="0,8,0,0" />
+            <TextBlock x:Name="HSVValueText" FontSize="16" FontFamily="Consolas" />
+            <TextBlock x:Name="StateText" FontSize="14" FontWeight="SemiBold" Margin="0,8,0,0" />
         </StackPanel>
 
         <TextBlock
             Grid.Row="3"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
-            Margin="0,10,0,0"
+            Margin="0,5,0,0"
             Text="Spaceキー: 色の固定 / 固定解除"
-            Foreground="#88000000" />
+            Foreground="#FF000000" />
     </Grid>
 </Window>

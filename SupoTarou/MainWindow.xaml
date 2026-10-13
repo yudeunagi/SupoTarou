@@ -8,7 +8,7 @@
         Title="スポ太郎"
         ResizeMode="NoResize"
         Topmost="True"
-        Height="420"
+        Height="450"
         Width="300"
         Background="#888888"
         >
@@ -47,8 +47,8 @@
             <TextBlock x:Name="HSVValueText" FontSize="16" FontFamily="Consolas" />
             <Border
                 x:Name="CurrentColorPreview"
-                Width="40"
-                Height="40"
+                Width="240"
+                Height="20"
                 Margin="0,8,0,0"
                 BorderBrush="#66000000"
                 BorderThickness="1"

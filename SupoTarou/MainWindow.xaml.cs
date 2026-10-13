@@ -1,8 +1,10 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using SupoTarou.Input;
 using SupoTarou.Models;
 using SupoTarou.Services;
+using ServiceColorConverter = SupoTarou.Services.ColorConverter;
 
 namespace SupoTarou;
 
@@ -14,12 +16,14 @@ public partial class MainWindow : Window
     private readonly DispatcherTimer _samplingTimer;
     private readonly ScreenColorSampler _screenColorSampler = new();
     private readonly GlobalKeyboardHook _globalKeyboardHook = new();
+    private readonly SolidColorBrush _currentColorPreviewBrush = new(Colors.Black);
     private PickerState _pickerState = PickerState.Sampling;
-    private ColorData _currentColor = ColorConverter.FromRgb(0, 0, 0);
+    private ColorData _currentColor = ServiceColorConverter.FromRgb(0, 0, 0);
 
     public MainWindow()
     {
         InitializeComponent();
+        CurrentColorPreview.Background = _currentColorPreviewBrush;
         _samplingTimer = new DispatcherTimer(DispatcherPriority.Render)
         {
             Interval = TimeSpan.FromMilliseconds(33)
@@ -80,7 +84,7 @@ public partial class MainWindow : Window
     {
         if (_screenColorSampler.TrySampleRgb(out var red, out var green, out var blue))
         {
-            _currentColor = ColorConverter.FromRgb(red, green, blue);
+            _currentColor = ServiceColorConverter.FromRgb(red, green, blue);
             UpdateDisplay(_currentColor);
         }
     }
@@ -122,6 +126,7 @@ public partial class MainWindow : Window
         SvBox.Hue = colorData.H;
         SvBox.Saturation = colorData.S;
         SvBox.Value = colorData.V;
+        _currentColorPreviewBrush.Color = Color.FromRgb(colorData.R, colorData.G, colorData.B);
 
         HSVValueText.Text = $"HSV : {Math.Round(colorData.H):0}°, {Math.Round(colorData.S):0}%, {Math.Round(colorData.V):0}%";
         // 分割したい場合はこっち

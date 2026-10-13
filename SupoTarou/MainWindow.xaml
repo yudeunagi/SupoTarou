@@ -45,6 +45,14 @@
 
         <StackPanel Grid.Row="2" Margin="4,0,0,0">
             <TextBlock x:Name="HSVValueText" FontSize="16" FontFamily="Consolas" />
+            <Border
+                x:Name="CurrentColorPreview"
+                Width="40"
+                Height="40"
+                Margin="0,8,0,0"
+                BorderBrush="#66000000"
+                BorderThickness="1"
+                Background="#FF000000" />
             <TextBlock x:Name="StateText" FontSize="14" FontWeight="SemiBold" Margin="0,8,0,0" />
         </StackPanel>
 
